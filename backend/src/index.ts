@@ -1,16 +1,16 @@
 import express from "express"
 import dotenv from "dotenv"
+import { connectDb } from "./config/db.js"
+import { getAllUsers } from "./controllers/usuariosNegocio.controller.js"
+import { usuariosNegocioRoutes } from "./routes/usuariosNegocio.routes.js"
 
 
 const app = express()
-dotenv.config()
-
-
 const port = process.env.PORT
 
-app.get("/", (_req, res) => {
-    res.status(200).send("running")
-})
+dotenv.config()
+connectDb()
+
 
 
 
