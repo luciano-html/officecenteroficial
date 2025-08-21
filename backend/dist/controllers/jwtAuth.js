@@ -12,16 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connectDb = connectDb;
-const mongoose_1 = __importDefault(require("mongoose"));
-function connectDb() {
+exports.crearToken = crearToken;
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const secretToken = "super4secreta2la87clave";
+function crearToken(usuarioId, usuarioRol) {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield mongoose_1.default.connect(process.env.URI_REMOTA || "");
-            console.log("Conectado a la base de datos");
-        }
-        catch (error) {
-            console.log("Error al conectarse a la base de datos", error);
-        }
+        const payload = { id: usuarioId, rol: usuarioRol };
+        const token = jsonwebtoken_1.default.sign(payload, secretToken);
+        return token;
     });
 }

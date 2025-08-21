@@ -1,9 +1,8 @@
 import mongoose from "mongoose"
-const uri = "mongodb+srv://lucianocgutierrez:infamano22@officecluster1.i8uia.mongodb.net/productosdb"
 
 export async function connectDb() {
     try {
-        await mongoose.connect(uri)
+        await mongoose.connect(process.env.URI_REMOTA || "")
         console.log("Conectado a la base de datos");
 
     } catch (error) {

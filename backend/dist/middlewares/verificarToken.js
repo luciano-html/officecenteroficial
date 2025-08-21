@@ -12,16 +12,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connectDb = connectDb;
-const mongoose_1 = __importDefault(require("mongoose"));
-function connectDb() {
+exports.verificarToken = verificarToken;
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const secret = process.env.SECRET_KEY;
+function verificarToken(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
+        const { token } = req.cookies;
+        if (!token) {
+            return res.status(401).json({
+                message: "Sin token, desautorizado",
+                success: false
+            });
+        }
         try {
-            yield mongoose_1.default.connect(process.env.URI_REMOTA || "");
-            console.log("Conectado a la base de datos");
+            const decoded = jsonwebtoken_1.default.verify(token, secret);
+            req.user = decoded;
+            next();
         }
         catch (error) {
-            console.log("Error al conectarse a la base de datos", error);
+            console.log(secret);
+            return res.status(403).json({
+                message: "Token inválido",
+                success: false
+            });
         }
     });
 }

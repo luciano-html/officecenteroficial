@@ -2,5 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.usuariosNegocioRoutes = void 0;
 const express_1 = require("express");
+const usuariosNegocio_controller_1 = require("../controllers/usuariosNegocio.controller");
+const verificarToken_1 = require("../middlewares/verificarToken");
 exports.usuariosNegocioRoutes = (0, express_1.Router)();
-exports.usuariosNegocioRoutes.get("/usuarios");
+exports.usuariosNegocioRoutes.get("/", usuariosNegocio_controller_1.getAllUsers);
+exports.usuariosNegocioRoutes.post("/register", usuariosNegocio_controller_1.register);
+exports.usuariosNegocioRoutes.post("/login", usuariosNegocio_controller_1.login);
+exports.usuariosNegocioRoutes.post("/logout", usuariosNegocio_controller_1.logout);
+exports.usuariosNegocioRoutes.get("/profile", verificarToken_1.verificarToken, usuariosNegocio_controller_1.profile);
