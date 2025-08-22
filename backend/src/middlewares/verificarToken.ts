@@ -1,14 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
-const secret: string = process.env.SECRET_KEY!
-
 export interface TokenPayload extends JwtPayload {
     nombre: string,
     id: string;
     email: string;
     rol: string;
 }
+const secret: string = process.env.SECRET_KEY!
 
 export async function verificarToken(
     req: Request,
@@ -34,8 +33,6 @@ export async function verificarToken(
         next()
 
     } catch (error) {
-        console.log(secret);
-
         return res.status(403).json({
             message: "Token inválido",
             success: false

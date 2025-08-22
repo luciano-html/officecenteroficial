@@ -13,10 +13,6 @@ app.use(express.json());
 app.use(cookieParser())
 connectDb()
 
-
-
-
-
 app.use("/", usuariosNegocioRoutes)
 
 app.listen(port, () => {

@@ -1,0 +1,5 @@
+volver a revisar las funciones de verificarToken y jwtAuth
+
+refactorizar todos los errores del controlador, y revisar los del model
+
+crear la view en el front para el registro/login/perfil de admnistrador/empleado

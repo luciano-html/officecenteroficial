@@ -30,7 +30,6 @@ function verificarToken(req, res, next) {
             next();
         }
         catch (error) {
-            console.log(secret);
             return res.status(403).json({
                 message: "Token inválido",
                 success: false

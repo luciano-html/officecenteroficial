@@ -2,6 +2,7 @@ import { Router } from "express";
 import { getAllUsers, login, logout, profile, register } from "../controllers/usuariosNegocio.controller";
 import { verificarToken } from "../middlewares/verificarToken";
 
+
 export const usuariosNegocioRoutes = Router()
 
 usuariosNegocioRoutes.get("/", getAllUsers)
